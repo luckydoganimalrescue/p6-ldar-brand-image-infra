@@ -4,8 +4,8 @@ export default antfu({
   ignores: [
     '.github/',
     '.pnpm-store/',
+    '.vscode/',
     '.mergify.yml',
-    '.vscode/settings.json',
     '*.md',
     'cdk.json',
     'package.json',
