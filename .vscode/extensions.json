@@ -1,0 +1,9 @@
+{
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "foxundermoon.shell-format",
+    "orta.vscode-jest",
+    "vscode.json-language-features",
+    "vscode.typescript-language-features"
+  ]
+}

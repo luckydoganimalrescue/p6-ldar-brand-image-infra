@@ -1,0 +1,13 @@
+name: upgrade-main
+
+on:
+  workflow_dispatch: {}
+  schedule:
+    - cron: '0 14 * * *'
+
+jobs:
+  upgrade:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Upgrade Deps
+        uses: p6m7g8-actions/cdk-upgrade@main
