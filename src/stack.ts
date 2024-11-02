@@ -1,4 +1,5 @@
 import type { Construct } from 'constructs'
+import * as path from 'node:path'
 import * as cdk from 'aws-cdk-lib'
 import * as apigw from 'aws-cdk-lib/aws-apigatewayv2'
 import * as apigwi from 'aws-cdk-lib/aws-apigatewayv2-integrations'
@@ -175,11 +176,11 @@ export class MyStack extends cdk.Stack {
         minify: true,
       },
     })
+    presignFunc.addEnvironment('BUCKET_NAME', bucket.bucketName)
 
     bucket.grantPut(presignFunc)
     bucket.grantPublicAccess('*', 's3:PutObject')
 
-    presignFunc.addEnvironment('BUCKET_NAME', bucket.bucketName)
     const brandFunc = new lambdajs.NodejsFunction(this, 'brand', {
       runtime: lambda.Runtime.NODEJS_20_X,
       handler: 'handler',
@@ -188,17 +189,23 @@ export class MyStack extends cdk.Stack {
       memorySize: 4096,
       ephemeralStorageSize: cdk.Size.mebibytes(3072),
       bundling: {
+        forceDockerBundling: true,
+        dockerImage: cdk.DockerImage.fromBuild(path.join(__dirname, '../')),
         nodeModules: ['sharp'],
         externalModules: ['@aws-sdk/*'],
         minify: true,
       },
     })
-    bucket.grantReadWrite(brandFunc)
-
     brandFunc.addEnvironment('BRAND_IMAGE_BUCKET', bucket.bucketName)
     brandFunc.addEnvironment('EMAIL_SENDER', props.fromEmail)
     brandFunc.addEnvironment('EMAIL_REGION', this.region)
     brandFunc.addEnvironment('FIT', 'fill')
+
+    bucket.grantReadWrite(brandFunc)
+    brandFunc.addToRolePolicy(new iam.PolicyStatement({
+      actions: ['s3:ListBucket'],
+      resources: [bucket.bucketArn],
+    }))
 
     const policy = new floyd.Statement.Ses()
       .allow()

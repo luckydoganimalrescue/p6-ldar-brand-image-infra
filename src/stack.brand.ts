@@ -83,7 +83,7 @@ function generateEmailHtml(results: any[], zipKey: string): string {
 
   if (zipKey !== '') {
     const zipUrl = generateS3Url(
-      'p6-ldar-cdk-projen-brand-image-mybucketf68f3ff0-ild7kqxq8vce',
+      'p6-ldar-brand-image-imagebucket97210811-xitt4qy0efjd',
       zipKey,
     )
     html += '<div style="margin-top: 20px;">'
@@ -132,7 +132,7 @@ async function processRequest(event: APIGatewayProxyEvent): Promise<{ results: a
     const zipBuffer = await zipFiles(results)
     const zipKey = generateKey('processed_files.zip', 'package')
     await uploadToS3(
-      'p6-ldar-cdk-projen-brand-image-mybucketf68f3ff0-ild7kqxq8vce',
+      'p6-ldar-brand-image-imagebucket97210811-xitt4qy0efjd',
       zipKey,
       zipBuffer,
     )
@@ -223,7 +223,7 @@ async function processFile(file: {
 }): Promise<any> {
   const processedFile = await processImage(file.content)
 
-  const bucket = 'p6-ldar-cdk-projen-brand-image-mybucketf68f3ff0-ild7kqxq8vce'
+  const bucket = 'p6-ldar-brand-image-imagebucket97210811-xitt4qy0efjd'
   const originalKey = generateKey(file.filename, 'original')
   const processedKey = generateKey(file.filename, 'processed')
   await uploadToS3(bucket, originalKey, file.content)
@@ -331,7 +331,7 @@ async function uploadToS3(bucket: string, key: string, content: Buffer): Promise
 
 // Download a file from S3
 async function downloadFromS3(key: string): Promise<Buffer> {
-  const bucket = 'p6-ldar-cdk-projen-brand-image-mybucketf68f3ff0-ild7kqxq8vce'
+  const bucket = 'p6-ldar-brand-image-imagebucket97210811-xitt4qy0efjd'
   const params = {
     Bucket: bucket,
     Key: key,
