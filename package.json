@@ -19,7 +19,7 @@
     "@types/aws-lambda": "^8.10.145",
     "@types/jest": "^29.5.14",
     "@types/mime-types": "^2.1.4",
-    "@types/node": "22.8.6",
+    "@types/node": "24.10.9",
     "@typescript-eslint/eslint-plugin": "^8.12.2",
     "@typescript-eslint/parser": "^8.12.2",
     "aws-cdk": "2.165.0",
@@ -45,5 +45,5 @@
     "sharp": "^0.33.5",
     "source-map-support": "^0.5.21"
   },
-  "packageManager": "pnpm@9.12.3+sha512.cce0f9de9c5a7c95bef944169cc5dfe8741abfb145078c0d508b868056848a87c81e626246cb60967cbd7fd29a6c062ef73ff840d96b3c86c40ac92cf4a813ee"
+  "packageManager": "pnpm@10.28.0+sha512.6c8c75a6ae4b5f9ad0e77b61beb22c0a9f61734b7c55e61cea38e02dd3ca38b22ec4a4b1d5c863e38280e0e0bca18d4ff7f4bb09e7f2bf4f1eb28c77d81f8b42"
 }
