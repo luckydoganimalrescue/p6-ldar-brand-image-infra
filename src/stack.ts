@@ -169,7 +169,7 @@ export class MyStack extends cdk.Stack {
     })
 
     const presignFunc = new lambdajs.NodejsFunction(this, 'presign', {
-      runtime: lambda.Runtime.NODEJS_20_X,
+      runtime: lambda.Runtime.NODEJS_24_X,
       handler: 'handler',
       bundling: {
         minify: true,
@@ -181,7 +181,7 @@ export class MyStack extends cdk.Stack {
 
     presignFunc.addEnvironment('BUCKET_NAME', bucket.bucketName)
     const brandFunc = new lambdajs.NodejsFunction(this, 'brand', {
-      runtime: lambda.Runtime.NODEJS_20_X,
+      runtime: lambda.Runtime.NODEJS_24_X,
       handler: 'handler',
       tracing: lambda.Tracing.ACTIVE,
       timeout: cdk.Duration.minutes(14),
